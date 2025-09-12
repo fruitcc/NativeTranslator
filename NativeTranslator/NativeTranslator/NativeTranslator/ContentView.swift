@@ -177,16 +177,11 @@ struct ContentView: View {
                 
                 // Swap text content only if there's translated text
                 if !translatedText.isEmpty {
-                    let tempText = sourceText
+                    // Move translated text to source
                     sourceText = translatedText
-                    translatedText = tempText
-                    
-                    // Trigger new translation immediately if we have source text
-                    if !sourceText.isEmpty {
-                        Task {
-                            await performTranslation()
-                        }
-                    }
+                    // Clear translated text since it's no longer valid after swap
+                    translatedText = ""
+                    // Do NOT automatically trigger translation - let user decide when to translate
                 }
             }
         }
