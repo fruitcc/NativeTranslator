@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Native Translator Icon Generator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f0f0f0;
+            font-family: -apple-system, system-ui, sans-serif;
+        }
+        
+        .container {
+            text-align: center;
+        }
+        
+        canvas {
+            border-radius: 22.37%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin: 20px;
+            cursor: pointer;
+        }
+        
+        .controls {
+            margin: 20px;
+        }
+        
+        button {
+            background: #007AFF;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        button:hover {
+            background: #0051D5;
+        }
+        
+        .size-buttons {
+            margin: 20px 0;
+        }
+        
+        .size-buttons button {
+            background: #34C759;
+        }
+        
+        .size-buttons button:hover {
+            background: #248A3D;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Native Translator App Icon</h1>
+        <canvas id="iconCanvas" width="1024" height="1024"></canvas>
+        
+        <div class="controls">
+            <button onclick="downloadIcon(1024)">Download 1024x1024 (App Store)</button>
+            <button onclick="generateAllSizes()">Generate All iOS Sizes</button>
+        </div>
+        
+        <div class="size-buttons">
+            <button onclick="downloadIcon(180)">180x180</button>
+            <button onclick="downloadIcon(120)">120x120</button>
+            <button onclick="downloadIcon(87)">87x87</button>
+            <button onclick="downloadIcon(80)">80x80</button>
+            <button onclick="downloadIcon(60)">60x60</button>
+            <button onclick="downloadIcon(58)">58x58</button>
+            <button onclick="downloadIcon(40)">40x40</button>
+        </div>
+        
+        <p>Click any button to download the icon in that size</p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('iconCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        function drawIcon(size = 1024) {
+            // Set canvas size
+            canvas.width = size;
+            canvas.height = size;
+            
+            // Create gradient background
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#5B86E5');  // Light blue
+            gradient.addColorStop(1, '#36D1DC');  // Turquoise
+            
+            // Draw rounded rectangle background
+            drawRoundedRect(0, 0, size, size, size * 0.2237, gradient);
+            
+            // Draw globe watermark
+            ctx.save();
+            ctx.globalAlpha = 0.1;
+            ctx.fillStyle = 'white';
+            ctx.font = `${size * 0.3}px system-ui`;
+            ctx.translate(size * 0.2, size * 0.25);
+            ctx.rotate(-15 * Math.PI / 180);
+            ctx.fillText('🌐', 0, 0);
+            ctx.restore();
+            
+            // Draw main translation elements
+            const centerY = size * 0.5;
+            const leftX = size * 0.28;
+            const rightX = size * 0.72;
+            const circleRadius = size * 0.14;
+            
+            // White circles for letters
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            ctx.arc(leftX, centerY, circleRadius, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.arc(rightX, centerY, circleRadius, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Draw arrow between circles
+            ctx.strokeStyle = 'white';
+            ctx.lineWidth = size * 0.025;
+            ctx.lineCap = 'round';
+            
+            // Arrow shaft
+            ctx.beginPath();
+            ctx.moveTo(leftX + circleRadius + size * 0.02, centerY);
+            ctx.lineTo(rightX - circleRadius - size * 0.06, centerY);
+            ctx.stroke();
+            
+            // Arrow head
+            ctx.beginPath();
+            ctx.moveTo(rightX - circleRadius - size * 0.08, centerY - size * 0.04);
+            ctx.lineTo(rightX - circleRadius - size * 0.02, centerY);
+            ctx.lineTo(rightX - circleRadius - size * 0.08, centerY + size * 0.04);
+            ctx.stroke();
+            
+            // Draw text in circles
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            // Left text "A"
+            ctx.fillStyle = '#5B86E5';
+            ctx.font = `bold ${size * 0.16}px -apple-system, system-ui, sans-serif`;
+            ctx.fillText('A', leftX, centerY);
+            
+            // Right text "文" (Chinese character for "text/language")
+            ctx.fillStyle = '#36D1DC';
+            ctx.font = `bold ${size * 0.14}px -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif`;
+            ctx.fillText('文', rightX, centerY);
+            
+            // Add subtle shadow/glow effect
+            ctx.save();
+            ctx.globalAlpha = 0.3;
+            ctx.shadowColor = 'rgba(0,0,0,0.3)';
+            ctx.shadowBlur = size * 0.02;
+            ctx.shadowOffsetY = size * 0.01;
+            
+            // Redraw circles with shadow
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            ctx.arc(leftX, centerY, circleRadius, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.arc(rightX, centerY, circleRadius, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        }
+        
+        function drawRoundedRect(x, y, width, height, radius, fillStyle) {
+            ctx.fillStyle = fillStyle;
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+            ctx.fill();
+        }
+        
+        function downloadIcon(size) {
+            // Create a temporary canvas for the specific size
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = size;
+            tempCanvas.height = size;
+            const tempCtx = tempCanvas.getContext('2d');
+            
+            // Save current canvas
+            const currentCanvas = canvas.toDataURL();
+            
+            // Draw icon at requested size
+            drawIcon(size);
+            
+            // Download
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `NativeTranslator-Icon-${size}x${size}.png`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                // Restore original size
+                drawIcon(1024);
+            });
+        }
+        
+        function generateAllSizes() {
+            const sizes = [1024, 180, 120, 87, 80, 60, 58, 40];
+            let index = 0;
+            
+            function downloadNext() {
+                if (index < sizes.length) {
+                    downloadIcon(sizes[index]);
+                    index++;
+                    setTimeout(downloadNext, 500); // Delay to prevent browser blocking
+                }
+            }
+            
+            downloadNext();
+        }
+        
+        // Initial draw
+        drawIcon(1024);
+        
+        // Canvas click to download
+        canvas.addEventListener('click', () => downloadIcon(1024));
+    </script>
+</body>
+</html>

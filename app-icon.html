@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Native Translator App Icon</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .icon-container {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .icon-wrapper {
+            text-align: center;
+        }
+        
+        .icon-wrapper label {
+            display: block;
+            margin-top: 10px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .app-icon {
+            position: relative;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 22.37%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .app-icon.blue {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .app-icon.purple {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .app-icon.green {
+            background: linear-gradient(135deg, #38ef7d 0%, #11998e 100%);
+        }
+        
+        .icon-large {
+            width: 512px;
+            height: 512px;
+        }
+        
+        .icon-medium {
+            width: 180px;
+            height: 180px;
+        }
+        
+        .icon-small {
+            width: 60px;
+            height: 60px;
+        }
+        
+        .translation-symbol {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: white;
+            font-weight: bold;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .icon-large .translation-symbol {
+            gap: 40px;
+        }
+        
+        .icon-medium .translation-symbol {
+            gap: 15px;
+        }
+        
+        .icon-small .translation-symbol {
+            gap: 5px;
+        }
+        
+        .source-text, .target-text {
+            background: rgba(255,255,255,0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        
+        .icon-large .source-text, .icon-large .target-text {
+            width: 140px;
+            height: 140px;
+            font-size: 80px;
+        }
+        
+        .icon-medium .source-text, .icon-medium .target-text {
+            width: 50px;
+            height: 50px;
+            font-size: 28px;
+        }
+        
+        .icon-small .source-text, .icon-small .target-text {
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+        }
+        
+        .source-text {
+            color: #4facfe;
+        }
+        
+        .target-text {
+            color: #764ba2;
+        }
+        
+        .arrow {
+            color: white;
+            font-size: 60px;
+        }
+        
+        .icon-medium .arrow {
+            font-size: 24px;
+        }
+        
+        .icon-small .arrow {
+            font-size: 8px;
+        }
+        
+        .globe-watermark {
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            opacity: 0.15;
+            color: white;
+            font-size: 120px;
+            transform: rotate(-15deg);
+        }
+        
+        .icon-medium .globe-watermark {
+            font-size: 40px;
+        }
+        
+        .icon-small .globe-watermark {
+            display: none;
+        }
+        
+        /* Alternative minimalist design */
+        .app-icon-minimal {
+            background: linear-gradient(135deg, #3366ff 0%, #00d4ff 100%);
+        }
+        
+        .minimal-content {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            color: white;
+            font-size: 120px;
+            font-weight: bold;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        .icon-medium .minimal-content {
+            font-size: 42px;
+            gap: 10px;
+        }
+        
+        .icon-small .minimal-content {
+            font-size: 14px;
+            gap: 3px;
+        }
+        
+        .instructions {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .instructions h2 {
+            color: #333;
+            margin-top: 0;
+        }
+        
+        .instructions ol {
+            color: #666;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="icon-container">
+            <!-- Design 1: Circles with Arrow -->
+            <div class="icon-wrapper">
+                <div class="app-icon blue icon-large">
+                    <div class="globe-watermark">🌐</div>
+                    <div class="translation-symbol">
+                        <div class="source-text">A</div>
+                        <div class="arrow">→</div>
+                        <div class="target-text">文</div>
+                    </div>
+                </div>
+                <label>Design 1 - Large (512x512)</label>
+            </div>
+            
+            <!-- Design 2: Minimalist -->
+            <div class="icon-wrapper">
+                <div class="app-icon app-icon-minimal icon-large">
+                    <div class="minimal-content">
+                        <span>A</span>
+                        <span style="font-size: 0.6em;">⇄</span>
+                        <span>あ</span>
+                    </div>
+                </div>
+                <label>Design 2 - Minimal (512x512)</label>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h2>How to Use as App Icon:</h2>
+            <ol>
+                <li>Take a screenshot of your preferred design (Cmd+Shift+4 on Mac)</li>
+                <li>Open the screenshot in Preview</li>
+                <li>Use the selection tool to select just the icon (hold Shift for perfect square)</li>
+                <li>Copy (Cmd+C) and create new from clipboard (Cmd+N)</li>
+                <li>Export as PNG at 1024x1024 pixels</li>
+                <li>In Xcode, go to Assets.xcassets</li>
+                <li>Drag your PNG to the AppIcon slots</li>
+                <li>Xcode will automatically generate all required sizes</li>
+            </ol>
+            
+            <p><strong>Alternative:</strong> Use an online tool like <a href="https://appicon.co" target="_blank">appicon.co</a> to generate all sizes from your 1024x1024 image.</p>
+        </div>
+        
+        <!-- Preview different sizes -->
+        <div class="icon-container" style="margin-top: 40px;">
+            <div class="icon-wrapper">
+                <div class="app-icon blue icon-medium">
+                    <div class="globe-watermark">🌐</div>
+                    <div class="translation-symbol">
+                        <div class="source-text">A</div>
+                        <div class="arrow">→</div>
+                        <div class="target-text">文</div>
+                    </div>
+                </div>
+                <label>iPhone (180x180)</label>
+            </div>
+            
+            <div class="icon-wrapper">
+                <div class="app-icon blue icon-small">
+                    <div class="translation-symbol">
+                        <div class="source-text">A</div>
+                        <div class="arrow">→</div>
+                        <div class="target-text">文</div>
+                    </div>
+                </div>
+                <label>Small (60x60)</label>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
