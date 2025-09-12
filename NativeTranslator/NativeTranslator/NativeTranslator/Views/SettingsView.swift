@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @Binding var isPresented: Bool
-    @AppStorage("backendURL") private var backendURL = "http://localhost:3001"
+    @AppStorage("backendURL") private var backendURL = "https://translation-service-gemini.onrender.com"
     @State private var tempURL: String = ""
     @State private var isTestingConnection = false
     @State private var testResult: TestResult?
@@ -29,7 +29,7 @@ struct SettingsView: View {
                                 tempURL = backendURL
                             }
                         
-                        Text("Default: http://localhost:3001")
+                        Text("Default: https://translation-service-gemini.onrender.com")
                             .font(.caption)
                             .foregroundColor(.gray)
                     }

@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 class TranslationService: ObservableObject {
-    @AppStorage("backendURL") private var backendURL = "http://localhost:3001"
+    @AppStorage("backendURL") private var backendURL = "https://translation-service-gemini.onrender.com"
     
     private var baseURL: String {
         return "\(backendURL)/api"
