@@ -175,14 +175,11 @@ struct ContentView: View {
                 targetLanguage = newTargetLang
                 targetLanguageCode = newTargetLang.code
                 
-                // Swap text content only if there's translated text
-                if !translatedText.isEmpty {
-                    // Move translated text to source
-                    sourceText = translatedText
-                    // Clear translated text since it's no longer valid after swap
-                    translatedText = ""
-                    // Do NOT automatically trigger translation - let user decide when to translate
-                }
+                // Swap text content between source and target
+                let tempText = sourceText
+                sourceText = translatedText
+                translatedText = tempText
+                // Do NOT automatically trigger translation - let user decide when to translate
             }
         }
     }
