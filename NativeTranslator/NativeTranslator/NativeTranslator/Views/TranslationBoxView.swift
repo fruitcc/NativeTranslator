@@ -74,16 +74,12 @@ struct TranslationBoxView: View {
                         }
                     }
             } else {
-                // Use ScrollView with Text for read-only display that allows selection
-                ScrollView {
-                    Text(text.isEmpty ? "Translation will appear here" : text)
-                        .font(.system(size: 18))
-                        .foregroundColor(text.isEmpty ? .gray : .primary)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(12)
-                        .textSelection(.enabled) // Allow text selection
-                }
-                .scrollContentBackground(.hidden)
+                // Use custom ReadOnlyTextView that allows selection without keyboard
+                ReadOnlyTextView(
+                    text: text,
+                    placeholder: "Translation will appear here",
+                    font: .systemFont(ofSize: 18)
+                )
                 .background(Color(UIColor.systemGray6))
             }
         }
