@@ -8,6 +8,7 @@ struct TranslationBoxView: View {
     let isSource: Bool
     let onCopy: () -> Void
     @State private var showLanguageSelector = false
+    @FocusState private var isTextFieldFocused: Bool
     
     var body: some View {
         VStack(spacing: 0) {
@@ -33,6 +34,18 @@ struct TranslationBoxView: View {
                 
                 Spacer()
                 
+                // Show keyboard dismiss button only for source input when keyboard is active
+                if isSource && isTextFieldFocused {
+                    Button(action: {
+                        isTextFieldFocused = false
+                    }) {
+                        Image(systemName: "keyboard.chevron.compact.down")
+                            .font(.system(size: 18))
+                            .foregroundColor(.blue)
+                    }
+                    .padding(.trailing, 8)
+                }
+                
                 Button(action: onCopy) {
                     Image(systemName: "doc.on.doc")
                         .font(.system(size: 18))
@@ -50,6 +63,16 @@ struct TranslationBoxView: View {
                     .font(.system(size: 18))
                     .scrollContentBackground(.hidden)
                     .background(Color(UIColor.systemGray6))
+                    .focused($isTextFieldFocused)
+                    .toolbar {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            Spacer()
+                            Button("Done") {
+                                isTextFieldFocused = false
+                            }
+                            .fontWeight(.semibold)
+                        }
+                    }
             } else {
                 TextEditor(text: .constant(text.isEmpty ? "Translation will appear here" : text))
                     .padding(12)
