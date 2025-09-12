@@ -7,6 +7,7 @@ struct TranslationBoxView: View {
     let availableLanguages: [Language]
     let isSource: Bool
     let onCopy: () -> Void
+    let onShowHistory: (() -> Void)?
     @State private var showLanguageSelector = false
     @FocusState private var isTextFieldFocused: Bool
     
@@ -30,6 +31,16 @@ struct TranslationBoxView: View {
                     .padding(.vertical, 8)
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(8)
+                }
+                
+                // Show history button only for source box
+                if isSource, let onShowHistory = onShowHistory {
+                    Button(action: onShowHistory) {
+                        Image(systemName: "clock.arrow.circlepath")
+                            .font(.system(size: 20))
+                            .foregroundColor(.blue)
+                    }
+                    .padding(.leading, 8)
                 }
                 
                 Spacer()

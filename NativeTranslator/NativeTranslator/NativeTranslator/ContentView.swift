@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var translationService = TranslationService()
+    @StateObject private var historyManager = TranslationHistoryManager()
     @State private var sourceText = ""
     @State private var translatedText = ""
     @AppStorage("sourceLanguageCode") private var sourceLanguageCode = "auto"
@@ -11,6 +12,7 @@ struct ContentView: View {
     @State private var targetLanguage = Language.availableTargetLanguages[0]
     @State private var showContextPopup = false
     @State private var showSettings = false
+    @State private var showHistory = false
     @State private var isTranslating = false
     @State private var errorMessage = ""
     @State private var showError = false
@@ -100,6 +102,32 @@ struct ContentView: View {
         .sheet(isPresented: $showSettings) {
             SettingsView(isPresented: $showSettings)
         }
+        .sheet(isPresented: $showHistory) {
+            HistoryListView(
+                historyManager: historyManager,
+                isPresented: $showHistory,
+                onSelect: { item in
+                    // Load the selected history item
+                    sourceText = item.sourceText
+                    translatedText = item.translatedText
+                    
+                    // Update languages
+                    if let sourceLang = Language.availableLanguages.first(where: { $0.code == item.sourceLanguageCode }) {
+                        sourceLanguage = sourceLang
+                        sourceLanguageCode = sourceLang.code
+                    }
+                    if let targetLang = Language.availableTargetLanguages.first(where: { $0.code == item.targetLanguageCode }) {
+                        targetLanguage = targetLang
+                        targetLanguageCode = targetLang.code
+                    }
+                    
+                    // Restore context if available
+                    if let historyContext = item.context {
+                        context = historyContext
+                    }
+                }
+            )
+        }
         .alert("Translation Error", isPresented: $showError) {
             Button("OK") { }
         } message: {
@@ -122,6 +150,9 @@ struct ContentView: View {
             isSource: true,
             onCopy: {
                 UIPasteboard.general.string = sourceText
+            },
+            onShowHistory: {
+                showHistory = true
             }
         )
         .onChange(of: sourceLanguage) { newValue in
@@ -152,7 +183,8 @@ struct ContentView: View {
             isSource: false,
             onCopy: {
                 UIPasteboard.general.string = translatedText
-            }
+            },
+            onShowHistory: nil
         )
         .onChange(of: targetLanguage) { newValue in
             targetLanguageCode = newValue.code
@@ -199,6 +231,16 @@ struct ContentView: View {
             await MainActor.run {
                 if response.success, let data = response.data {
                     translatedText = data.translatedText
+                    
+                    // Save to history
+                    let historyItem = TranslationHistoryItem(
+                        sourceText: sourceText,
+                        translatedText: translatedText,
+                        sourceLanguage: sourceLanguage,
+                        targetLanguage: targetLanguage,
+                        context: context.isEmpty ? nil : context
+                    )
+                    historyManager.addItem(historyItem)
                 } else if let error = response.error {
                     errorMessage = error.message
                     showError = true
