@@ -74,13 +74,17 @@ struct TranslationBoxView: View {
                         }
                     }
             } else {
-                TextEditor(text: .constant(text.isEmpty ? "Translation will appear here" : text))
-                    .padding(12)
-                    .font(.system(size: 18))
-                    .foregroundColor(text.isEmpty ? .gray : .primary)
-                    .scrollContentBackground(.hidden)
-                    .background(Color(UIColor.systemGray6))
-                    .disabled(false) // Allow text selection but not editing
+                // Use ScrollView with Text for read-only display that allows selection
+                ScrollView {
+                    Text(text.isEmpty ? "Translation will appear here" : text)
+                        .font(.system(size: 18))
+                        .foregroundColor(text.isEmpty ? .gray : .primary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(12)
+                        .textSelection(.enabled) // Allow text selection
+                }
+                .scrollContentBackground(.hidden)
+                .background(Color(UIColor.systemGray6))
             }
         }
         .sheet(isPresented: $showLanguageSelector) {
