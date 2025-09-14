@@ -52,7 +52,18 @@ class TranslationHistoryManager: ObservableObject {
     }
     
     func addItem(_ item: TranslationHistoryItem) {
-        // Add new item at the beginning
+        // Check for duplicate based on input parameters only (not translated output)
+        if let existingIndex = items.firstIndex(where: { existing in
+            existing.sourceText == item.sourceText &&
+            existing.sourceLanguageCode == item.sourceLanguageCode &&
+            existing.targetLanguageCode == item.targetLanguageCode &&
+            existing.context == item.context
+        }) {
+            // Remove the old entry and add the new one with updated translation and timestamp
+            items.remove(at: existingIndex)
+        }
+        
+        // Add new item at the beginning (whether it's new or updating an existing one)
         items.insert(item, at: 0)
         
         // Keep only the last maxItems
@@ -68,7 +79,7 @@ class TranslationHistoryManager: ObservableObject {
         saveHistory()
     }
     
-    private func saveHistory() {
+    func saveHistory() {
         if let encoded = try? JSONEncoder().encode(items) {
             UserDefaults.standard.set(encoded, forKey: storageKey)
         }

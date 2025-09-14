@@ -8,8 +8,8 @@ struct TranslationBoxView: View {
     let isSource: Bool
     let onCopy: () -> Void
     let onShowHistory: (() -> Void)?
+    var focusBinding: FocusState<Bool>.Binding?
     @State private var showLanguageSelector = false
-    @FocusState private var isTextFieldFocused: Bool
     
     var body: some View {
         VStack(spacing: 0) {
@@ -46,9 +46,9 @@ struct TranslationBoxView: View {
                 Spacer()
                 
                 // Show keyboard dismiss button only for source input when keyboard is active
-                if isSource && isTextFieldFocused {
+                if isSource, let focusBinding = focusBinding, focusBinding.wrappedValue {
                     Button(action: {
-                        isTextFieldFocused = false
+                        focusBinding.wrappedValue = false
                     }) {
                         Image(systemName: "keyboard.chevron.compact.down")
                             .font(.system(size: 18))
@@ -69,21 +69,20 @@ struct TranslationBoxView: View {
             
             // Text Area
             if isSource {
-                TextEditor(text: $text)
-                    .padding(12)
-                    .font(.system(size: 18))
-                    .scrollContentBackground(.hidden)
-                    .background(Color(UIColor.systemGray6))
-                    .focused($isTextFieldFocused)
-                    .toolbar {
-                        ToolbarItemGroup(placement: .keyboard) {
-                            Spacer()
-                            Button("Done") {
-                                isTextFieldFocused = false
-                            }
-                            .fontWeight(.semibold)
-                        }
-                    }
+                if let focusBinding = focusBinding {
+                    TextEditor(text: $text)
+                        .padding(12)
+                        .font(.system(size: 18))
+                        .scrollContentBackground(.hidden)
+                        .background(Color(UIColor.systemGray6))
+                        .focused(focusBinding)
+                } else {
+                    TextEditor(text: $text)
+                        .padding(12)
+                        .font(.system(size: 18))
+                        .scrollContentBackground(.hidden)
+                        .background(Color(UIColor.systemGray6))
+                }
             } else {
                 // Use custom ReadOnlyTextView that allows selection without keyboard
                 ReadOnlyTextView(

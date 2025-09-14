@@ -16,6 +16,7 @@ struct ContentView: View {
     @State private var isTranslating = false
     @State private var errorMessage = ""
     @State private var showError = false
+    @FocusState private var isSourceTextFocused: Bool
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.verticalSizeClass) var verticalSizeClass
     
@@ -90,6 +91,14 @@ struct ContentView: View {
                     }
                     .disabled(sourceText.isEmpty || isTranslating)
                 }
+                
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("Done") {
+                        isSourceTextFocused = false
+                    }
+                    .fontWeight(.semibold)
+                }
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
@@ -153,7 +162,8 @@ struct ContentView: View {
             },
             onShowHistory: {
                 showHistory = true
-            }
+            },
+            focusBinding: $isSourceTextFocused
         )
         .onChange(of: sourceLanguage) { newValue in
             sourceLanguageCode = newValue.code

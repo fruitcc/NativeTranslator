@@ -42,47 +42,52 @@ struct HistoryListView: View {
                                 onSelect(item)
                                 isPresented = false
                             }) {
-                                VStack(alignment: .leading, spacing: 8) {
+                                VStack(alignment: .leading, spacing: 6) {
                                     // Languages and time
                                     HStack {
                                         Text("\(item.sourceLanguageName) → \(item.targetLanguageName)")
                                             .font(.caption)
                                             .foregroundColor(.blue)
+                                        
+                                        // Context indicator if present
+                                        if let context = item.context, !context.isEmpty {
+                                            Image(systemName: "text.bubble.fill")
+                                                .font(.caption2)
+                                                .foregroundColor(.orange)
+                                        }
+                                        
                                         Spacer()
+                                        
                                         Text(item.formattedDate)
                                             .font(.caption)
                                             .foregroundColor(.secondary)
                                     }
                                     
-                                    // Source text preview
-                                    Text(item.previewText)
+                                    // Source text - show more lines
+                                    Text(item.sourceText)
                                         .font(.body)
                                         .foregroundColor(.primary)
-                                        .lineLimit(2)
-                                    
-                                    // Translated text preview
-                                    Text(item.translatedText)
-                                        .font(.subheadline)
-                                        .foregroundColor(.secondary)
-                                        .lineLimit(1)
-                                    
-                                    // Context indicator if present
-                                    if let context = item.context, !context.isEmpty {
-                                        HStack {
-                                            Image(systemName: "text.bubble")
-                                                .font(.caption2)
-                                            Text("With context")
-                                                .font(.caption2)
-                                        }
-                                        .foregroundColor(.orange)
-                                    }
+                                        .lineLimit(3)
+                                        .multilineTextAlignment(.leading)
                                 }
                                 .padding(.vertical, 4)
                             }
                             .buttonStyle(PlainButtonStyle())
+                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                Button(role: .destructive) {
+                                    historyManager.items.removeAll { $0.id == item.id }
+                                    historyManager.saveHistory()
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
+                            }
                         }
                         .onDelete { indexSet in
-                            historyManager.items.remove(atOffsets: indexSet)
+                            // When searching, we need to find the actual items to delete
+                            let itemsToDelete = indexSet.map { filteredItems[$0] }
+                            historyManager.items.removeAll { item in
+                                itemsToDelete.contains { $0.id == item.id }
+                            }
                             historyManager.saveHistory()
                         }
                     }
@@ -116,11 +121,3 @@ struct HistoryListView: View {
     }
 }
 
-// Extension to make save history accessible
-extension TranslationHistoryManager {
-    func saveHistory() {
-        if let encoded = try? JSONEncoder().encode(items) {
-            UserDefaults.standard.set(encoded, forKey: "TranslationHistory")
-        }
-    }
-}
