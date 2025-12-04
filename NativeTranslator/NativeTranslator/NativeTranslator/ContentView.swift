@@ -160,6 +160,10 @@ struct ContentView: View {
             onCopy: {
                 UIPasteboard.general.string = sourceText
             },
+            onClear: {
+                sourceText = ""
+                isSourceTextFocused = true
+            },
             onShowHistory: {
                 showHistory = true
             },
@@ -194,6 +198,7 @@ struct ContentView: View {
             onCopy: {
                 UIPasteboard.general.string = translatedText
             },
+            onClear: nil,
             onShowHistory: nil
         )
         .onChange(of: targetLanguage) { newValue in

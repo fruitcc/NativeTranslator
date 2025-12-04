@@ -7,6 +7,7 @@ struct TranslationBoxView: View {
     let availableLanguages: [Language]
     let isSource: Bool
     let onCopy: () -> Void
+    let onClear: (() -> Void)?
     let onShowHistory: (() -> Void)?
     var focusBinding: FocusState<Bool>.Binding?
     @State private var showLanguageSelector = false
@@ -56,7 +57,17 @@ struct TranslationBoxView: View {
                     }
                     .padding(.trailing, 8)
                 }
-                
+
+                // Show clear button only for source
+                if isSource, let onClear = onClear {
+                    Button(action: onClear) {
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.system(size: 18))
+                            .foregroundColor(.gray)
+                    }
+                    .padding(.trailing, 8)
+                }
+
                 Button(action: onCopy) {
                     Image(systemName: "doc.on.doc")
                         .font(.system(size: 18))

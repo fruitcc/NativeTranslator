@@ -27,11 +27,38 @@
 		86415EF52E741A13000CE460 /* NativeTranslator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NativeTranslator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86415F022E741A14000CE460 /* NativeTranslatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NativeTranslatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		86415F0C2E741A14000CE460 /* NativeTranslatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NativeTranslatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8662E9552EE10790001AFC3A /* NativeTranslator prod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NativeTranslator prod.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		8662E9562EE10790001AFC3A /* Exceptions for "NativeTranslator" folder in "NativeTranslator prod" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				AppIconView.swift,
+				Assets.xcassets,
+				ContentView.swift,
+				Models/Language.swift,
+				Models/TranslationHistory.swift,
+				Models/TranslationModels.swift,
+				NativeTranslatorApp.swift,
+				Services/TranslationService.swift,
+				Views/ContextPopupView.swift,
+				Views/HistoryListView.swift,
+				Views/LanguageSelectorView.swift,
+				Views/ReadOnlyTextView.swift,
+				Views/SettingsView.swift,
+				Views/TranslationBoxView.swift,
+			);
+			target = 8662E94E2EE10790001AFC3A /* NativeTranslator prod */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		86415EF72E741A13000CE460 /* NativeTranslator */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				8662E9562EE10790001AFC3A /* Exceptions for "NativeTranslator" folder in "NativeTranslator prod" target */,
+			);
 			path = NativeTranslator;
 			sourceTree = "<group>";
 		};
@@ -69,6 +96,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8662E9502EE10790001AFC3A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -88,6 +122,7 @@
 				86415EF52E741A13000CE460 /* NativeTranslator.app */,
 				86415F022E741A14000CE460 /* NativeTranslatorTests.xctest */,
 				86415F0C2E741A14000CE460 /* NativeTranslatorUITests.xctest */,
+				8662E9552EE10790001AFC3A /* NativeTranslator prod.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -163,6 +198,28 @@
 			productReference = 86415F0C2E741A14000CE460 /* NativeTranslatorUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		8662E94E2EE10790001AFC3A /* NativeTranslator prod */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8662E9522EE10790001AFC3A /* Build configuration list for PBXNativeTarget "NativeTranslator prod" */;
+			buildPhases = (
+				8662E94F2EE10790001AFC3A /* Sources */,
+				8662E9502EE10790001AFC3A /* Frameworks */,
+				8662E9512EE10790001AFC3A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				86415EF72E741A13000CE460 /* NativeTranslator */,
+			);
+			name = "NativeTranslator prod";
+			packageProductDependencies = (
+			);
+			productName = NativeTranslator;
+			productReference = 8662E9552EE10790001AFC3A /* NativeTranslator prod.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -203,6 +260,7 @@
 				86415EF42E741A13000CE460 /* NativeTranslator */,
 				86415F012E741A14000CE460 /* NativeTranslatorTests */,
 				86415F0B2E741A14000CE460 /* NativeTranslatorUITests */,
+				8662E94E2EE10790001AFC3A /* NativeTranslator prod */,
 			);
 		};
 /* End PBXProject section */
@@ -229,6 +287,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8662E9512EE10790001AFC3A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -247,6 +312,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		86415F082E741A14000CE460 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8662E94F2EE10790001AFC3A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -400,11 +472,13 @@
 				DEVELOPMENT_TEAM = K6V64KS775;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -428,11 +502,13 @@
 				DEVELOPMENT_TEAM = K6V64KS775;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -518,6 +594,66 @@
 			};
 			name = Release;
 		};
+		8662E9532EE10790001AFC3A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9F5534T98N;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fruitcc.native-translator";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8662E9542EE10790001AFC3A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9F5534T98N;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fruitcc.native-translator";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -553,6 +689,15 @@
 			buildConfigurations = (
 				86415F1D2E741A14000CE460 /* Debug */,
 				86415F1E2E741A14000CE460 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8662E9522EE10790001AFC3A /* Build configuration list for PBXNativeTarget "NativeTranslator prod" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8662E9532EE10790001AFC3A /* Debug */,
+				8662E9542EE10790001AFC3A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
